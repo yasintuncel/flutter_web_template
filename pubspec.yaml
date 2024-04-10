@@ -13,6 +13,9 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   go_router: ^13.2.2
+
+  # handle SVGs for Android, iOS, and Web.
+  websafe_svg: ^1.1.4+1
   
   flutter_web_plugins:
     sdk: flutter

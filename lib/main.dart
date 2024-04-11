@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/url_strategy.dart'; // add this import
-import 'routes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
+import 'app/routes/router.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-  runApp(
-    MyApp(),
-  );
+  runApp(const ProviderScope(child: Application()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Application extends ConsumerWidget {
+  const Application({super.key});
 
+  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Web Template',
-      routerConfig: appRoutes,
+      title: 'Responsive Flutter Admin Web Template',
+      routerConfig: router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        useMaterial3: true,
-        // pageTransitionsTheme: const PageTransitionsTheme(
-        //   builders: <TargetPlatform, PageTransitionsBuilder>{
-        //     TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(), // Apply this to every platforms you need.
-        //   },
-        // ),
+        useMaterial3: false,
+        // colorSchemeSeed: Colors.blue,
       ),
     );
   }
